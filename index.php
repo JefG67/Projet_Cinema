@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Controller\CinemaController; 
 
@@ -11,9 +12,11 @@ $ctlrCinema = new CinemaController();
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
 
-        case "listFilm": $ctlrFilm->listFilm(); break;
-        case "listActeur": $ctlrPersonne->listActeur(); break; 
+        case "listFilm": $ctlrCinema->listFilm(); break;
+        case "listActeur": $ctlrCinema->listActeur(); break;
     }
-}        
+} else {
+    $ctlrCinema->accueil();
+}  
 
 ?>

@@ -6,17 +6,27 @@ use Model\Connect;
 
 class CinemaController {
 
-    public function afficheTitreFilm() {
+    public function accueil() {
+        require "view/accueil.php";
+    }
+
+    public function listFilm() {
+
         $pdo = Connect::seConnecter();
 
-        // Requete pour l'affichage des films 
-        $requete = $pdo->query("
-                SELECT 
-                    film.titre_film, 
-                    film.annee_de_sortie,
-                FROM film
-                ");
+        $requete = $pdo->query("SELECT * FROM film");
                 
-                require "view/afficheTitreFilm.php";
+                
+        require "view/listeFilm.php";
+    }
+
+    public function listActeur() {
+
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->query("SELECT personne.nom AS nom, personne.prenom AS prenom FROM acteur INNER JOIN personne ON acteur.id_personne = personne.id_personne");
+                
+                
+        require "view/listActeur.php";
     }
 }                
