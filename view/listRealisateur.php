@@ -1,7 +1,7 @@
 
 <?php ob_start(); ?>
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete-> rowCount() ?> acteur</p>
+<p class="uk-label uk-label-warning">Il y a <?= $requete-> rowCount() ?> Realisateur</p>
 
 <table class="uk-table uk-table-striped">
     <thead>
@@ -12,10 +12,10 @@
     </thead>
     <tbody>
         <?php
-            foreach($requete->fetchAll() as $acteur) { ?>
+            foreach($requete->fetchAll() as $realisateur) { ?>
                 <tr>
-                    <td><?= $acteur["nom"] ?></td>
-                    <td><?= $acteur["prenom"] ?></td>
+                    <td><?= $realisateur["nom"] ?></td>
+                    <td><?= $realisateur["prenom"] ?></td>
                 </tr>
         <?php } ?>
     </tbody>
@@ -23,8 +23,8 @@
 
 <?php
 
-$titre = "Liste des acteurs";
-$titre_secondaire = "Liste des acteurs";
+$titre = "Liste des Realisateur";
+$titre_secondaire = "Liste des Realisateur";
 $contenu = ob_get_clean(); 
 require "view/template.php";
 
