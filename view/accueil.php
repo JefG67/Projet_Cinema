@@ -6,7 +6,8 @@
 <a href="index.php?action=listRealisateur"> Liste Realisateur</a><br>
 <a href="index.php?action=listGenre"> Liste des genres</a><br>
 <a href="index.php?action=listRole"> Liste des role</a><br>
-<a href="index.php?action=detailFilm"> detailFilm 1</a><br>
+<a href="index.php?action=detailFilm&id=4"> detailFilm </a><br>
+<a href="index.php?action=supprimerGenre&id=10"> Supprimer Genre </a><br>
 
 <?php
 

@@ -26,7 +26,7 @@
                     <td><?= $film["synopsis_film"] ?></td>
                     
                 </tr>
-                >
+                
         <?php } ?>
     </tbody>
 </table>

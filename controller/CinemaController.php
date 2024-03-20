@@ -133,8 +133,43 @@ class CinemaController {
         require "view/film/detailFilm.php";
 	
     }   
-}       
 
+//     //ajout d'un film
+//     public function ajoutFilm() {
+
+//         if(isset($_POST['submit'])){
+//             //je crée des filtres pour les données du formulaire
+//             $filmTitre = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+//             $filmNote = filter_input(INPUT_POST, "film_note",FILTER_SANITIZE_SPECIAL_CHARS);
+//             $filmDuree = filter_input(INPUT_POST, "film_duree",FILTER_SANITIZE_SPECIAL_CHARS);
+//             $filmSynopsis = filter_input(INPUT_POST, "film_synopsis", FILTER_SANITIZE_SPECIAL_CHARS);
+
+//         $pdo = Connect::seConnecter();
+//         $requete = $pdo->prepare
+//         ("
+//         INSERT INTO film (titre_film, annee_de_sortie, duree_film, note_film, synopsis_film)
+//         VALUES (:titre_film, :annee_de_sortie, :duree_film, :note_film, :synopsis_film)
+//         ");
+//         $requete->execute([]);
+//     }
+
+    public function supprimerGenre($id){
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare
+        ("DELETE 
+          FROM genre_film
+          WHERE id_genre_film = :id;
+        ");
+        $requete->execute(["id" => $id]);
+        $requete2 = $pdo->prepare
+        ("DELETE 
+          FROM categorie
+          WHERE id_genre_film = :id;
+        ");
+        $requete2->execute(["id" => $id]);
+}       
+}
 
 
 
