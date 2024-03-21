@@ -7,7 +7,10 @@
 <a href="index.php?action=listGenre"> Liste des genres</a><br>
 <a href="index.php?action=listRole"> Liste des role</a><br>
 <a href="index.php?action=detailFilm&id=4"> detailFilm </a><br>
-<a href="index.php?action=supprimerGenre&id=10"> Supprimer Genre </a><br>
+<a href="index.php?action=supprimerFilm&id=7"> Supprimer Film </a><br>
+<a href="index.php?action=supprimerGenre&id=11"> Supprimer Genre </a><br>
+<a href="index.php?action=supprimerRole&id=11"> Supprimer Genre </a><br>
+
 
 <?php
 
