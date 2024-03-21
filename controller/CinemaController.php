@@ -153,24 +153,10 @@ class CinemaController {
 //         $requete->execute([]);
 //     }
 
-    public function supprimerGenre($id){
-        $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("DELETE 
-          FROM genre_film
-          WHERE id_genre_film = :id;
-        ");
-        $requete->execute(["id" => $id]);
-        $requete2 = $pdo->prepare
-        ("DELETE 
-          FROM categorie
-          WHERE id_genre_film = :id;
-        ");
-        $requete2->execute(["id" => $id]);
-}       
+
+
 }
-
 
 
 
