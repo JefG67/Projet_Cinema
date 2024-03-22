@@ -11,9 +11,29 @@ class FilmController {
     }
 
 
-    public function supprimerFilm($id){
-            
+    public function listFilm() {
+
+
+
+        //list des films
         $pdo = Connect::seConnecter();
+
+        $requete = $pdo->query
+        ("SELECT * 
+        FROM film");
+                
+                
+        require "view/film/listFilm.php";
+    }
+
+
+
+    //Sup un film
+    public function supprimerFilm($id){
+        
+        
+        $pdo = Connect::seConnecter();
+        
 
         $requete = $pdo->prepare
         ("  DELETE 
@@ -22,8 +42,6 @@ class FilmController {
         ");
 
         $requete->execute(["id" => $id]);
-
-      
 
         
     }

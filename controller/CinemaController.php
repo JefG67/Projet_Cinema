@@ -10,77 +10,12 @@ class CinemaController {
         require "view/accueil.php";
     }
 
-    public function listFilm() {
 
-        $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query
-        ("SELECT * 
-        FROM film");
-                
-                
-        require "view/film/listFilm.php";
-    }
-
-    //liste d'acteur nom/prenom
-    public function listActeur() {
-
-        $pdo = Connect::seConnecter();
-
-        $requete = $pdo->query
-        ("SELECT 
-            personne.nom AS nom, 
-            personne.prenom AS prenom FROM acteur 
-        INNER JOIN personne ON acteur.id_personne = personne.id_personne");
-                
-                
-        require "view/listActeur.php";
-    }
-
-    //liste des realisateurs nom/prenom
-    public function listRealisateur() {
-
-        $pdo = Connect::seConnecter();
-
-        $requete = $pdo->query
-        ("SELECT 
-            personne.nom AS nom, 
-            personne.prenom AS prenom FROM realisateur 
-        INNER JOIN personne ON realisateur.id_personne = personne.id_personne");
-                
-                
-        require "view/listRealisateur.php";
-    }
+   
     
-    //list des genres 
 
-    public function listGenre() {
-
-        $pdo = Connect::seConnecter();
-
-        $requete = $pdo->query
-        ("SELECT 
-            libelle
-        FROM genre_film
-        
-        ");
-        require "view/listGenre.php";
-        
-    }
-    //list des roles 
-    public function listRole() {
-
-        $pdo = Connect::seConnecter();
-
-        $requete = $pdo->query
-        ("SELECT 
-            nom_role
-        FROM rolefilm
-        
-        ");
-        require "view/listrole.php";
-        
-    }
+   
     //affiche le détail d'un unique film 
     public function detailFilm(int $id) {
        
@@ -93,6 +28,7 @@ class CinemaController {
             film.annee_de_sortie,
             film.note_film,
             film.synopsis_film,
+            film.affiche_film,
         TIME_FORMAT(SEC_TO_TIME(film.duree_film * 60), '%Hh%imin') AS dure_film
         FROM film
         WHERE film.id_film = :id;

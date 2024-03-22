@@ -11,6 +11,7 @@
             <th>NOTE</th>
             <th>DUREE</th>
             <th>SYNOPSIS</th>
+            <th>AFFICHE</th>
             
         </tr>
     </thead>
@@ -24,6 +25,7 @@
                     <td><?= $film["note_film"] ?></td>
                     <td><?= $film["dure_film"] ?></td>
                     <td><?= $film["synopsis_film"] ?></td>
+                    <td><?= $film["affiche_film"] ?></td>
                     
                 </tr>
                 
