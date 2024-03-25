@@ -43,5 +43,28 @@ class PersonneController {
         require "view/listRealisateur.php";
     }
 
-    //Detail Realisateur
+    //Detail Acteur
+
+    public function detailActeur($id) {
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare
+        ("SELECT 
+        CONCAT(personne.prenom, ' ',personne.nom) AS nomActeur,
+        sexe,
+        date_naissance 
+        FROM personne
+        INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+        WHERE acteur.id_acteur = :id
+        ");
+        
+        $requete->execute(["id" => $id]);
+
+        $requete2 = $pdo->prepare("
+        
+        
+        ");
+
+    }
+
 }
