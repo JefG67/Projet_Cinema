@@ -36,7 +36,7 @@ class RoleController {
 
         $requete = $pdo->prepare
         ("  DELETE 
-            FROM role
+            FROM rolefilm
             WHERE id_role = :id
         ");
 

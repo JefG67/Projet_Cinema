@@ -40,10 +40,11 @@ if (isset($_GET["action"])) {
         
         
         //supprimer
-        case "supprimerFilm" :$ctlrFilm->supprimerFilm($id); break;
+        case "supprimerFilm" :$ctrlFilm->supprimerFilm($id); break;
         case "supprimerGenre" : $ctrlGenre->supprimerGenre($id); break;
         case "supprimerRole" : $ctrlRole->supprimerRole($id); break;
         case "supprimerActeur" : $ctrPersonne->supprimerActeur($id); break;
+        
         
     }
 } else {
