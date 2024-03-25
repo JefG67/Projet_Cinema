@@ -35,6 +35,7 @@ if (isset($_GET["action"])) {
         case "detailRole": $ctrlRole->detailRole($id); break;
         case "detailGenre": $ctrlGenre->detailGenre($id); break;
         case "detailActeur": $ctrlPersonne->detailActeur($id); break;
+        case "detailRealisateur": $ctrlPersonne->detailRealisateur($id); break;
 
         
         

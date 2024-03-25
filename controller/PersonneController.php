@@ -76,7 +76,41 @@ class PersonneController {
 
         $requete2->execute(["id"=> $id]);
 
-        require "view/personne/detailPersonne.php";
+        require "view/personne/detailPersonneActeur.php";
     }
 
+
+    //detail realisateur
+    public function detailRealisateur($id) {
+        $pdo = Connect::seConnecter(); 
+
+        $requete = $pdo->prepare
+        ("SELECT 
+        CONCAT(personne.prenom, ' ',personne.nom) AS nomRealisateur,
+        sexe,
+        date_naissance 
+        FROM personne
+        INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+        WHERE realisateur.id_realisateur = :id
+        ");
+
+        $requete->execute(["id"=> $id]);
+
+        $requete2 = $pdo->prepare
+        ("SELECT 
+        titre_film,
+        annee_de_sortie
+        FROM film
+        WHERE film.id_realisateur = :id
+        ORDER BY annee_de_sortie DESC
+        ");
+
+        $requete2->execute(["id"=> $id]);
+
+        require "view/personne/detailPersonneRealisateur.php";
+
+
+
+
+    }
 }
