@@ -34,7 +34,7 @@ if (isset($_GET["action"])) {
         case "detailFilm": $ctlrCinema->detailFilm($id); break;
         case "detailRole": $ctrlRole->detailRole($id); break;
         case "detailGenre": $ctrlGenre->detailGenre($id); break;
-        case "detailActeur": $ctrlPersonne->detailActeur($is); break;
+        case "detailActeur": $ctrlPersonne->detailActeur($id); break;
 
         
         
