@@ -46,7 +46,7 @@ class PersonneController {
     //Detail Acteur
 
     public function detailActeur($id) {
-        $pdo = Connect::seConnecter();
+        $pdo = Connect::seConnecter(); 
 
         $requete = $pdo->prepare
         ("SELECT 
@@ -60,11 +60,23 @@ class PersonneController {
         
         $requete->execute(["id" => $id]);
 
-        $requete2 = $pdo->prepare("
-        
-        
+        $requete2 = $pdo->prepare
+        ("SELECT 
+        nom_role,
+        titre_film,
+        annee_de_sortie
+        FROM casting
+        INNER JOIN film ON casting.id_film = film.id_film
+        INNER JOIN rolefilm ON casting.id_role = rolefilm.id_role
+        INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+        INNER JOIN personne ON acteur.id_personne = personne.id_personne
+        WHERE casting.id_acteur = :id
+        ORDER BY film_date_sortie DESC              
         ");
 
+        $requete2->execute(["id"=> $id]);
+
+        require "view/listDetailActeur.php";
     }
 
 }
