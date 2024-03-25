@@ -71,12 +71,12 @@ class PersonneController {
         INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
         INNER JOIN personne ON acteur.id_personne = personne.id_personne
         WHERE casting.id_acteur = :id
-        ORDER BY film_date_sortie DESC              
+        ORDER BY annee_de_sortie DESC              
         ");
 
         $requete2->execute(["id"=> $id]);
 
-        require "view/listDetailActeur.php";
+        require "view/personne/detailPersonne.php";
     }
 
 }
