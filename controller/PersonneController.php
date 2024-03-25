@@ -108,9 +108,31 @@ class PersonneController {
         $requete2->execute(["id"=> $id]);
 
         require "view/personne/detailPersonneRealisateur.php";
-
-
-
-
+                
     }
+    //supprimer un acteur
+    public function supprimerActeur($id){
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare
+        ("DELETE 
+        FROM acteur
+        WHERE id_acteur = :id
+        ");
+        $requete->execute(["id"=> $id]); 
+    }    
+
+    //supprimer un realisateur
+    public function supprimerRealisateur($id){
+
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare
+        ("DELETE 
+        FROM realisateur
+        WHERE id_realisateur = :id
+        ");
+
+        $requete->execute(["id"=> $id]); 
+    }    
 }

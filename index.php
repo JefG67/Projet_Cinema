@@ -31,7 +31,7 @@ if (isset($_GET["action"])) {
         case "listRole": $ctrlRole->listRole(); break;
 
         //detail
-        case "detailFilm": $ctlrCinema->detailFilm($id); break;
+        case "detailFilm": $ctrlFilm->detailFilm($id); break;
         case "detailRole": $ctrlRole->detailRole($id); break;
         case "detailGenre": $ctrlGenre->detailGenre($id); break;
         case "detailActeur": $ctrlPersonne->detailActeur($id); break;
@@ -43,7 +43,7 @@ if (isset($_GET["action"])) {
         case "supprimerFilm" :$ctrlFilm->supprimerFilm($id); break;
         case "supprimerGenre" : $ctrlGenre->supprimerGenre($id); break;
         case "supprimerRole" : $ctrlRole->supprimerRole($id); break;
-        case "supprimerActeur" : $ctrPersonne->supprimerActeur($id); break;
+        case "supprimerActeur" : $ctrlPersonne->supprimerActeur($id); break;
         
         
     }
