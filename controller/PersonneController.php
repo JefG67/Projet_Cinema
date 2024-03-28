@@ -119,7 +119,9 @@ class PersonneController {
         FROM acteur
         WHERE id_acteur = :id
         ");
-        $requete->execute(["id"=> $id]); 
+        $requete->execute(["id"=> $id]);
+        
+        header("Location:index.php?action=listActeur");die;
     }    
 
     //supprimer un realisateur
@@ -133,6 +135,8 @@ class PersonneController {
         WHERE id_realisateur = :id
         ");
 
-        $requete->execute(["id"=> $id]); 
+        $requete->execute(["id"=> $id]);
+
+        header("Location:index.php?action=listRealisateur");die;
     }    
 }

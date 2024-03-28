@@ -39,7 +39,7 @@ class GenreController {
         ");
         $requete->execute(["id" => $id]);
 
-        header("Location:index.php?action=listeGenres");die;
+        header("Location:index.php?action=listGenre");die;
    
     }     
     //detail genre
