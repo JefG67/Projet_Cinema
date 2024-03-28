@@ -45,7 +45,8 @@ if (isset($_GET["action"])) {
         case "supprimerRole" : $ctrlRole->supprimerRole($id); break;
         case "supprimerActeur" : $ctrlPersonne->supprimerActeur($id); break;
         
-        
+        //ajout
+        case "ajoutGenre" : $ctrlGenre->ajoutGenre($id_genre); break;
     }
 } else {
     $ctlrCinema->accueil();

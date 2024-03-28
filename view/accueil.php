@@ -15,6 +15,7 @@
 <a href="index.php?action=supprimerGenre&id=11"> Supprimer Genre </a><br>
 <a href="index.php?action=supprimerRole&id=20"> Supprimer Role </a><br>
 <a href="index.php?action=supprimerActeur&id=21"> Supprimer Acteur </a><br>
+<a href="view/genre/ajoutGenre.php"> ajout </a><br>
 
 
 <?php

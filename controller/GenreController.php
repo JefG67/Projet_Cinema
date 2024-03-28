@@ -63,6 +63,21 @@ class GenreController {
 
         
     }
+    //ajout Genre
+    public function ajoutGenre(){
+
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare("
+            INSERT INTO genre (id_genre) VALUE (:id_genre)
+        ");
+
+        $requete->execute(["id_genre"=>$id_genre]);
+
+        require "view/ajouts/ajoutGenre.php";
+    }
+        
+        
 
 }
 
