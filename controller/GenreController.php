@@ -38,6 +38,8 @@ class GenreController {
           WHERE id_genre_film = :id;
         ");
         $requete->execute(["id" => $id]);
+
+        header("Location:index.php?action=listeGenres");die;
    
     }     
     //detail genre
