@@ -43,6 +43,7 @@ class RoleController {
         $requete->execute(["id"=>$id
         ]);
 
+        header("Location:index.php?action=listRole");die;    
     }
 
     //detail role
