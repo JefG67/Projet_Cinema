@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 
+
 <h1>Ajout genre</h1>
 
 <div>
@@ -8,7 +9,7 @@
         <p>
             <label>
                 Libellé du genre :
-                <input type="text" name="genre_libelle">
+                <input type="text" name="nameGenre">
             </label>
         </p>
         <p>
@@ -18,3 +19,11 @@
         </p>
     </form>
 </div>
+
+
+<?php
+
+$titre = "Ajout genre";
+$contenu = ob_get_clean(); 
+require "view/template.php";
+?>

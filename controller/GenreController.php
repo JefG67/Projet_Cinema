@@ -1,54 +1,56 @@
-<?php 
+<?php
 
 
 namespace Controller;
+
 use Model\Connect;
 
-class GenreController {
+class GenreController
+{
 
-    public function accueil() {
+    public function accueil()
+    {
         require "view/accueil.php";
     }
 
 
 
-        //list des genres 
+    //list des genres 
 
-     public function listGenre() {
+    public function listGenre()
+    {
 
         $pdo = Connect::seConnecter();
-    
-        $requete = $pdo->query
-        ("SELECT 
+
+        $requete = $pdo->query("SELECT 
             libelle
         FROM genre_film
             
         ");
         require "view/genre/listGenre.php";
-            
-        }
+    }
 
-        //supprimer un genre
-    public function supprimerGenre($id){
+    //supprimer un genre
+    public function supprimerGenre($id)
+    {
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("DELETE 
+        $requete = $pdo->prepare("DELETE 
           FROM genre_film
           WHERE id_genre_film = :id;
         ");
         $requete->execute(["id" => $id]);
 
-        header("Location:index.php?action=listGenre");die;
-   
-    }     
+        header("Location:index.php?action=listGenre");
+        die;
+    }
     //detail genre
-    public function detailGenre($id){
+    public function detailGenre($id)
+    {
         $pdo = Connect::seConnecter();
 
-        
-        $requete = $pdo->prepare
-        ("SELECT
+
+        $requete = $pdo->prepare("SELECT
             film.id_film AS idFilm,
             film.titre_film,
             film.affiche_film,
@@ -62,27 +64,32 @@ class GenreController {
         $requete->execute(["id" => $id]);
 
         require "view/genre/detailGenre.php";
-
-        
     }
     //ajout Genre
-    public function ajoutGenre(){
+    public function ajoutGenre()
+    {
 
-        $pdo = Connect::seConnecter();
+        if (isset($_POST['submit'])) {
+            //je crée des filtres pour les données du formulaire
+            $nameGenre = filter_input(INPUT_POST, "nameGenre", FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $requete = $pdo->prepare("
-            INSERT INTO genre (id_genre) VALUE (:id_genre)
+            if ($nameGenre) {
+
+                $pdo = Connect::seConnecter();
+
+                $requete = $pdo->prepare("
+            INSERT INTO genre_film (libelle) VALUES (:libelle)
         ");
 
-        $requete->execute(["id_genre"=>$id_genre]);
-
-        require "view/ajouts/ajoutGenre.php";
+                $requete->execute(["libelle" => $nameGenre]);
+                
+                header("Location:index.php?action=listGenre");
+                die;
+            }
+        }
+        
     }
-        
-        
-
+    public function ajoutGenreFormulaire(){
+        require "view/genre/ajoutGenre.php";
+    }
 }
-
-
-
-
