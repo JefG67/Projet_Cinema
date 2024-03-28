@@ -25,7 +25,7 @@ class PersonneController {
         INNER JOIN personne ON acteur.id_personne = personne.id_personne");
                 
                 
-        require "view/listActeur.php";
+        require "view/personne/listActeur.php";
     }
 
     //liste des realisateurs nom/prenom
@@ -40,7 +40,7 @@ class PersonneController {
         INNER JOIN personne ON realisateur.id_personne = personne.id_personne");
                 
                 
-        require "view/listRealisateur.php";
+        require "view/personne/listRealisateur.php";
     }
 
     //Detail Acteur
