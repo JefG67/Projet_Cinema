@@ -43,6 +43,8 @@ class FilmController {
 
         $requete->execute(["id" => $id]);
 
+        header("Location:index.php?action=listFilm");die;
+
         
     }
 
