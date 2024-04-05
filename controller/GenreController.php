@@ -89,6 +89,8 @@ class GenreController
         }
         
     }
+
+    //affichage du formulaire pour l'ajout Genre
     public function ajoutGenreFormulaire(){
         require "view/genre/ajoutGenre.php";
     }

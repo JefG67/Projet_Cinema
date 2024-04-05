@@ -48,6 +48,8 @@ if (isset($_GET["action"])) {
         //ajout
         case "ajoutGenre" : $ctrlGenre->ajoutGenre(); break;
         case "ajoutGenreFormulaire" : $ctrlGenre->ajoutGenreFormulaire(); break;
+        case "ajoutRole" : $ctrlRole->ajoutRole(); break;
+        case "ajoutRoleFormulaire" : $ctrlRole->ajoutRoleFormulaire(); break;
     }
 } else {
     $ctlrCinema->accueil();

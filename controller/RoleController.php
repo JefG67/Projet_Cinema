@@ -72,4 +72,40 @@ class RoleController {
         require "view/role/detailRole.php";
 
 }
+
+
+    //ajout role
+    public function ajoutRole(){
+    
+
+        if(isset($_POST['submit'])){
+
+             //je crée des filtres pour les données du formulaire
+            $nomRole = filter_input(INPUT_POST, "nom_role",FILTER_SANITIZE_SPECIAL_CHARS);
+            
+    
+            // Si tous les champs on bien été remplis
+            if($nomRole){
+              
+            }
+        }   
+
+        $pdo = Connect::seConnecter();
+
+        $requete = $pdo->prepare("
+            INSERT INTO rolefilm (nom_role) VALUE (:nom_role)
+        ");
+
+        
+        $requete->execute(["nom_role"=>$nomRole]);
+
+        require "view/role/ajoutRole.php";
+    }
+
+        // Affichage formulaire pour ajout rôle
+
+        public function ajoutRoleFormulaire(){
+            require "view/role/ajoutRole.php";
+        }
+    
     }
