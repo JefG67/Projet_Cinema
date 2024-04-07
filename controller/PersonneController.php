@@ -138,5 +138,38 @@ class PersonneController {
         $requete->execute(["id"=> $id]);
 
         header("Location:index.php?action=listRealisateur");die;
-    }    
+    }
+
+    //ajout d'un realisateur et acteur
+    public function ajoutPersonne(){
+
+        if(isset($_POST['submit'])){
+            $prenomPersonne = filter_input(INPUT_POST, "prenomPersonne", FILTER_SANITIZE_SPECIAL_CHARS);
+            $nomPersonne = filter_input(INPUT_POST, "nomPersonne", FILTER_SANITIZE_SPECIAL_CHARS);
+            $sexePersonne = filter_input(INPUT_POST, "sexePersonne", FILTER_SANITIZE_SPECIAL_CHARS);
+            $dateNaissancePersonne = filter_input(INPUT_POST, "dateNaissancePersonne",FILTER_SANITIZE_SPECIAL_CHARS);
+
+            if ($prenomPersonne && $nomPersonne &&  $sexePersonne && $dateNaissancePersonne) {
+
+            $pdo = Connect::seConnecter();
+
+            $requete = $pdo->prepare
+            ("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
+              VALUES (:prenom, :nom, :sexe, :date_naissance)
+            ");
+
+        $requete->execute(["prenom"=> $prenomPersonne,
+                            "nom"=> $nomPersonne,
+                            "sexe"=> $sexePersonne,
+                            "date_naissance"=>$dateNaissancePersonne]); 
+             
+        }
+
+        }
+    }
+    
+    
+    public function ajoutPersonneFormulaire(){
+        require "view/personne/ajoutPersonne.php";
+    }
 }

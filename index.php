@@ -50,6 +50,9 @@ if (isset($_GET["action"])) {
         case "ajoutGenreFormulaire" : $ctrlGenre->ajoutGenreFormulaire(); break;
         case "ajoutRole" : $ctrlRole->ajoutRole(); break;
         case "ajoutRoleFormulaire" : $ctrlRole->ajoutRoleFormulaire(); break;
+        case "ajoutPersonne" : $ctrlPersonne->ajoutPersonne(); break;
+        case "ajoutPersonneFormulaire" : $ctrlPersonne->ajoutPersonneFormulaire(); break;
+        
     }
 } else {
     $ctlrCinema->accueil();

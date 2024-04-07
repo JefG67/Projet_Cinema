@@ -17,6 +17,7 @@
 <a href="index.php?action=supprimerActeur&id=21"> Supprimer Acteur </a><br>
 <a href="index.php?action=ajoutGenreFormulaire"> Ajout Genre </a><br>
 <a href="index.php?action=ajoutRoleFormulaire"> Ajout d'un role </a><br>
+<a href="index.php?action=ajoutPersonneFormulaire"> Ajout Personne </a><br>
 
 
 <?php
