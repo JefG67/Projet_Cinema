@@ -32,7 +32,7 @@
         
         <p>
             <label>Métier</label>
-            <select name="professions">
+            <select name="metier">
                 <option value="">Choix</option>
                 <option value="acteur">Acteur</option>
                 <option value="realisateur">Réalisateur</option>

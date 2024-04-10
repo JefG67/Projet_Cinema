@@ -1,55 +1,58 @@
-<?php 
+<?php
 
 
 namespace Controller;
+
 use Model\Connect;
 
-class PersonneController {
+class PersonneController
+{
 
-    public function accueil() {
+    public function accueil()
+    {
         require "view/accueil.php";
     }
 
 
 
 
-     //liste d'acteur nom/prenom
-     public function listActeur() {
+    //liste d'acteur nom/prenom
+    public function listActeur()
+    {
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query
-        ("SELECT 
+        $requete = $pdo->query("SELECT 
             personne.nom AS nom, 
             personne.prenom AS prenom FROM acteur 
         INNER JOIN personne ON acteur.id_personne = personne.id_personne");
-                
-                
+
+
         require "view/personne/listActeur.php";
     }
 
     //liste des realisateurs nom/prenom
-    public function listRealisateur() {
+    public function listRealisateur()
+    {
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query
-        ("SELECT 
+        $requete = $pdo->query("SELECT 
             personne.nom AS nom, 
             personne.prenom AS prenom FROM realisateur 
         INNER JOIN personne ON realisateur.id_personne = personne.id_personne");
-                
-                
+
+
         require "view/personne/listRealisateur.php";
     }
 
     //Detail Acteur
 
-    public function detailActeur($id) {
-        $pdo = Connect::seConnecter(); 
+    public function detailActeur($id)
+    {
+        $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("SELECT 
+        $requete = $pdo->prepare("SELECT 
         CONCAT(personne.prenom, ' ',personne.nom) AS nomActeur,
         sexe,
         date_naissance 
@@ -57,11 +60,10 @@ class PersonneController {
         INNER JOIN acteur ON personne.id_personne = acteur.id_personne
         WHERE acteur.id_acteur = :id
         ");
-        
+
         $requete->execute(["id" => $id]);
 
-        $requete2 = $pdo->prepare
-        ("SELECT 
+        $requete2 = $pdo->prepare("SELECT 
         nom_role,
         titre_film,
         annee_de_sortie
@@ -74,18 +76,18 @@ class PersonneController {
         ORDER BY annee_de_sortie DESC              
         ");
 
-        $requete2->execute(["id"=> $id]);
+        $requete2->execute(["id" => $id]);
 
         require "view/personne/detailPersonneActeur.php";
     }
 
 
     //detail realisateur
-    public function detailRealisateur($id) {
-        $pdo = Connect::seConnecter(); 
+    public function detailRealisateur($id)
+    {
+        $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("SELECT 
+        $requete = $pdo->prepare("SELECT 
         CONCAT(personne.prenom, ' ',personne.nom) AS nomRealisateur,
         sexe,
         date_naissance 
@@ -94,10 +96,9 @@ class PersonneController {
         WHERE realisateur.id_realisateur = :id
         ");
 
-        $requete->execute(["id"=> $id]);
+        $requete->execute(["id" => $id]);
 
-        $requete2 = $pdo->prepare
-        ("SELECT 
+        $requete2 = $pdo->prepare("SELECT 
         titre_film,
         annee_de_sortie
         FROM film
@@ -105,71 +106,108 @@ class PersonneController {
         ORDER BY annee_de_sortie DESC
         ");
 
-        $requete2->execute(["id"=> $id]);
+        $requete2->execute(["id" => $id]);
 
         require "view/personne/detailPersonneRealisateur.php";
-                
     }
     //supprimer un acteur
-    public function supprimerActeur($id){
+    public function supprimerActeur($id)
+    {
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("DELETE 
+        $requete = $pdo->prepare("DELETE 
         FROM acteur
         WHERE id_acteur = :id
         ");
-        $requete->execute(["id"=> $id]);
-        
-        header("Location:index.php?action=listActeur");die;
-    }    
+        $requete->execute(["id" => $id]);
+
+        header("Location:index.php?action=listActeur");
+        die;
+    }
 
     //supprimer un realisateur
-    public function supprimerRealisateur($id){
+    public function supprimerRealisateur($id)
+    {
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("DELETE 
+        $requete = $pdo->prepare("DELETE 
         FROM realisateur
         WHERE id_realisateur = :id
         ");
 
-        $requete->execute(["id"=> $id]);
+        $requete->execute(["id" => $id]);
 
-        header("Location:index.php?action=listRealisateur");die;
+        header("Location:index.php?action=listRealisateur");
+        die;
     }
 
     //ajout d'un realisateur et acteur
-    public function ajoutPersonne(){
+    public function ajoutPersonne()
+    {
 
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $prenomPersonne = filter_input(INPUT_POST, "prenomPersonne", FILTER_SANITIZE_SPECIAL_CHARS);
             $nomPersonne = filter_input(INPUT_POST, "nomPersonne", FILTER_SANITIZE_SPECIAL_CHARS);
             $sexePersonne = filter_input(INPUT_POST, "sexePersonne", FILTER_SANITIZE_SPECIAL_CHARS);
-            $dateNaissancePersonne = filter_input(INPUT_POST, "dateNaissancePersonne",FILTER_SANITIZE_SPECIAL_CHARS);
+            $dateNaissancePersonne = filter_input(INPUT_POST, "dateNaissancePersonne", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            if ($prenomPersonne && $nomPersonne &&  $sexePersonne && $dateNaissancePersonne) {
 
             $pdo = Connect::seConnecter();
 
-            $requete = $pdo->prepare
-            ("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
-              VALUES (:prenom, :nom, :sexe, :date_naissance)
+            if ($_POST["metier"] == "acteur") {
+
+
+                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
+                  VALUES (:prenom, :nom, :sexe, :date_naissance)
             ");
 
-        $requete->execute(["prenom"=> $prenomPersonne,
-                            "nom"=> $nomPersonne,
-                            "sexe"=> $sexePersonne,
-                            "date_naissance"=>$dateNaissancePersonne]); 
-             
+                $requete->execute([
+                    "prenom" => $prenomPersonne,
+                    "nom" => $nomPersonne,
+                    "sexe" => $sexePersonne,
+                    "date_naissance" => $dateNaissancePersonne
+                ]);
+
+
+                $idPersonne = $pdo->lastInsertId();
+
+                $requeteAjoutActeur = $pdo->prepare("INSERT INTO acteur (id_personne) VALUES (:id_personne) 
+            ");
+
+                $requeteAjoutActeur->execute([
+                    "id_personne" => $idPersonne
+                ]);
+            } else {
+                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
+                  VALUES (:prenom, :nom, :sexe, :date_naissance)
+            ");
+
+                $requete->execute([
+                    "prenom" => $prenomPersonne,
+                    "nom" => $nomPersonne,
+                    "sexe" => $sexePersonne,
+                    "date_naissance" => $dateNaissancePersonne
+                ]);
+
+                $idPersonne = $pdo->lastInsertId();
+
+                $requeteAjoutRéalisateur = $pdo->prepare("INSERT INTO realisateur (id_personne) VALUES (:id_personne) 
+                    ");
+
+                $requeteAjoutRéalisateur->execute([
+                    "id_personne" => $idPersonne
+                ]);
+            }
         }
 
-        }
+        require "view/personne/ajoutPersonne.php";        
+
     }
-    
-    
-    public function ajoutPersonneFormulaire(){
+
+
+    public function ajoutPersonneFormulaire()
+    {
         require "view/personne/ajoutPersonne.php";
     }
 }
