@@ -36,7 +36,6 @@
                 <option value="">Choix</option>
                 <option value="acteur">Acteur</option>
                 <option value="realisateur">Réalisateur</option>
-                <option value="both">Acteur et réalisateur</option>
             </select>
         </p>
         <p>
@@ -46,6 +45,7 @@
         </p>
     </form>
 </div>
+                
 
 
 <?php

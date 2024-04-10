@@ -154,11 +154,12 @@ class PersonneController
 
 
             $pdo = Connect::seConnecter();
-
+            
+            // Ajout acteur 
             if ($_POST["metier"] == "acteur") {
 
 
-                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
+                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, date_naissance) 
                   VALUES (:prenom, :nom, :sexe, :date_naissance)
             ");
 
@@ -179,7 +180,7 @@ class PersonneController
                     "id_personne" => $idPersonne
                 ]);
             } else {
-                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, _date_naissance) 
+                $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, date_naissance) 
                   VALUES (:prenom, :nom, :sexe, :date_naissance)
             ");
 
