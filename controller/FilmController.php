@@ -1,61 +1,63 @@
-<?php 
+<?php
 
 
 namespace Controller;
+
 use Model\Connect;
 
-class FilmController {
+class FilmController
+{
 
-    public function accueil() {
+    public function accueil()
+    {
         require "view/accueil.php";
     }
 
 
-    public function listFilm() {
+    public function listFilm()
+    {
 
 
 
         //list des films
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query
-        ("SELECT * 
+        $requete = $pdo->query("SELECT * 
         FROM film");
-                
-                
+
+
         require "view/film/listFilm.php";
     }
 
 
 
     //Sup un film
-    public function supprimerFilm($id){
-        
-        
-        $pdo = Connect::seConnecter();
-        
+    public function supprimerFilm($id)
+    {
 
-        $requete = $pdo->prepare
-        ("  DELETE 
+
+        $pdo = Connect::seConnecter();
+
+
+        $requete = $pdo->prepare("  DELETE 
             FROM film 
             WHERE id_film = :id;
         ");
 
         $requete->execute(["id" => $id]);
 
-        header("Location:index.php?action=listFilm");die;
-
-        
+        header("Location:index.php?action=listFilm");
+        die;
     }
 
     //affiche le détail d'un unique film 
-    public function detailFilm(int $id) {
-       
-       
+    public function detailFilm(int $id)
+    {
+
+
         $pdo = Connect::seConnecter();
         //j'affiche un element via son ID
-        $requete = $pdo->prepare
-        ("SELECT
+        $requete = $pdo->prepare("SELECT
             film.titre_film,
             film.annee_de_sortie,
             film.note_film,
@@ -65,13 +67,12 @@ class FilmController {
         FROM film
         WHERE film.id_film = :id;
         ");
-      
+
         $requete->execute(["id" => $id]);
-        
-        
+
+
         //affiche acteurs + roles
-        $requete2 = $pdo->prepare
-        ("SELECT 
+        $requete2 = $pdo->prepare("SELECT 
             rolefilm.nom_role AS nomRoleFilm,
 	        CONCAT(personne.prenom, ' ',personne.nom) AS nActeur
 	    
@@ -83,12 +84,11 @@ class FilmController {
         
 	    WHERE film.id_film = :id;
         ");
-        
+
         $requete2->execute(["id" => $id]);
-        
+
         //afficher le genre
-        $requete3 = $pdo->prepare
-        ("SELECT
+        $requete3 = $pdo->prepare("SELECT
             genre_film.libelle AS genre                  
         FROM genre_film
         INNER JOIN categorie ON categorie.id_genre_film = genre_film.id_genre_film
@@ -99,7 +99,5 @@ class FilmController {
         $requete3->execute(["id" => $id]);
 
         require "view/film/detailFilm.php";
-	
     }
-
 }

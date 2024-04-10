@@ -1,59 +1,63 @@
-<?php 
+<?php
 
 
 namespace Controller;
+
 use Model\Connect;
 
-class RoleController {
+class RoleController
+{
 
-    public function accueil() {
+    public function accueil()
+    {
         require "view/accueil.php";
     }
 
 
 
     //list des roles 
-    public function listRole() {
+    public function listRole()
+    {
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->query
-        ("SELECT 
+        $requete = $pdo->query("SELECT 
             nom_role
         FROM rolefilm
         
         ");
         require "view/role/listrole.php";
-        
     }
 
 
     //sup un roles    
-    public function supprimerRole($id){
+    public function supprimerRole($id)
+    {
 
 
         $pdo = Connect::seConnecter();
 
-        $requete = $pdo->prepare
-        ("  DELETE 
+        $requete = $pdo->prepare("  DELETE 
             FROM rolefilm
             WHERE id_role = :id
         ");
 
-        $requete->execute(["id"=>$id
+        $requete->execute([
+            "id" => $id
         ]);
 
-        header("Location:index.php?action=listRole");die;    
+        header("Location:index.php?action=listRole");
+        die;
     }
 
     //detail role
-    public function detailRole($id) {  
+    public function detailRole($id)
+    {
 
         $pdo = Connect::seConnecter();
 
-       
-        $requete = $pdo->prepare
-        ("SELECT 
+
+        $requete = $pdo->prepare("SELECT 
             film.titre_film AS titreFilm,
             film.id_film AS idFilm,
             rolefilm.id_role AS idRole,
@@ -70,25 +74,24 @@ class RoleController {
 
         $requete->execute(["id" => $id]);
         require "view/role/detailRole.php";
-
-}
+    }
 
 
     //ajout role
-    public function ajoutRole(){
-    
+    public function ajoutRole()
+    {
 
-        if(isset($_POST['submit'])){
 
-             //je crée des filtres pour les données du formulaire
-            $nomRole = filter_input(INPUT_POST, "nom_role",FILTER_SANITIZE_SPECIAL_CHARS);
-            
-    
+        if (isset($_POST['submit'])) {
+
+            //je crée des filtres pour les données du formulaire
+            $nomRole = filter_input(INPUT_POST, "nom_role", FILTER_SANITIZE_SPECIAL_CHARS);
+
+
             // Si tous les champs on bien été remplis
-            if($nomRole){
-              
+            if ($nomRole) {
             }
-        }   
+        }
 
         $pdo = Connect::seConnecter();
 
@@ -96,16 +99,16 @@ class RoleController {
             INSERT INTO rolefilm (nom_role) VALUE (:nom_role)
         ");
 
-        
-        $requete->execute(["nom_role"=>$nomRole]);
+
+        $requete->execute(["nom_role" => $nomRole]);
 
         require "view/role/ajoutRole.php";
     }
 
-        // Affichage formulaire pour ajout rôle
+    // Affichage formulaire pour ajout rôle
 
-        public function ajoutRoleFormulaire(){
-            require "view/role/ajoutRole.php";
-        }
-    
+    public function ajoutRoleFormulaire()
+    {
+        require "view/role/ajoutRole.php";
     }
+}

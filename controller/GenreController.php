@@ -77,21 +77,20 @@ class GenreController
 
                 $pdo = Connect::seConnecter();
 
-                $requete = $pdo->prepare("
-            INSERT INTO genre_film (libelle) VALUES (:libelle)
+                $requete = $pdo->prepare("INSERT INTO genre_film (libelle) VALUES (:libelle)
         ");
 
                 $requete->execute(["libelle" => $nameGenre]);
-                
+
                 header("Location:index.php?action=listGenre");
                 die;
             }
         }
-        
     }
 
     //affichage du formulaire pour l'ajout Genre
-    public function ajoutGenreFormulaire(){
+    public function ajoutGenreFormulaire()
+    {
         require "view/genre/ajoutGenre.php";
     }
 }
