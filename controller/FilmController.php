@@ -100,4 +100,38 @@ class FilmController
 
         require "view/film/detailFilm.php";
     }
+
+    //ajout Film
+    public function ajoutFilm(){
+        if(isset($_POST['submit'])){
+            $titreFilm = filter_input(INPUT_POST, "titreFilme",FILTER_SANITIZE_SPECIAL_CHARS);
+            $dateSortieFilm = filter_input(INPUT_POST, "dateSortieFilm",FILTER_SANITIZE_SPECIAL_CHARS);
+            $dureeFilm = filter_input(INPUT_POST, "dureeFilm",FILTER_SANITIZE_SPECIAL_CHARS);
+            $noteFilm = filter_input(INPUT_POST, "noteFilm",FILTER_SANITIZE_SPECIAL_CHARS);
+            $synopsisFilm = filter_input(INPUT_POST, "synopsisFilm",FILTER_SANITIZE_SPECIAL_CHARS);
+            $afficheFilm = filter_input(INPUT_POST, "afficheFilm",FILTER_SANITIZE_URL);
+
+            $pdo = Connect::seConnecter();
+
+            $requete = $pdo->prepare
+            ("INSERT INTO film ( titre_film, annee_de_sortie, duree_film, note_film, synopsis_film, affiche_film)
+            VALUES ( :titre_film, :annee_de_sortie, :duree_film, :note_film, :synopsis_film, :affiche_film)
+            ");
+
+            $requete->execute([
+                "titre"=>$titreFilm,
+                "date_sortie"=>$dateSortieFilm,
+                "duree"=>$dureeFilm,
+                "note"=>$noteFilm,
+                "synopsis"=>$synopsisFilm,
+                "affiche"=>$afficheFilm,
+                
+            ]); 
+
+
+        }
+
+
+
+    }
 }
