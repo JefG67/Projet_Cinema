@@ -154,7 +154,7 @@ class PersonneController
 
 
             $pdo = Connect::seConnecter();
-            
+
             // Ajout acteur 
             if ($_POST["metier"] == "acteur") {
 
@@ -179,6 +179,7 @@ class PersonneController
                 $requeteAjoutActeur->execute([
                     "id_personne" => $idPersonne
                 ]);
+                //ajout realisateur
             } else {
                 $requete = $pdo->prepare("INSERT INTO personne (prenom, nom, sexe, date_naissance) 
                   VALUES (:prenom, :nom, :sexe, :date_naissance)
