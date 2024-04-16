@@ -52,6 +52,7 @@ if (isset($_GET["action"])) {
         case "ajoutRoleFormulaire" : $ctrlRole->ajoutRoleFormulaire(); break;
         case "ajoutPersonne" : $ctrlPersonne->ajoutPersonne(); break;
         case "ajoutPersonneFormulaire" : $ctrlPersonne->ajoutPersonneFormulaire(); break;
+        case "ajoutFilmFormulaire" : $ctrlFilm->ajoutFilm(); break;
         
     }
 } else {
